@@ -1,12 +1,21 @@
 const loadPhones = () => {
   const searchField = document.getElementById("input-field");
   const searchInput = searchField.value;
-  // fetch(`https://openapi.programming-hero.com/api/phones?search=iphone`)
-  fetch(`https://openapi.programming-hero.com/api/phones?search=${searchInput}`)
-    .then((res) => res.json())
-    .then((data) => displayPhone(data.data));
   // clear input value
   searchField.value = "";
+
+  if (searchInput == "") {
+    const phoneContainer = document.getElementById("phone-container");
+    phoneContainer.innerHTML = `
+    <h1>Please Write Something to Display</h1>
+    `;
+  } else {
+    fetch(
+      `https://openapi.programming-hero.com/api/phones?search=${searchInput}`
+    )
+      .then((res) => res.json())
+      .then((data) => displayPhone(data.data));
+  }
 };
 
 const displayPhone = (phones) => {
@@ -20,12 +29,9 @@ const displayPhone = (phones) => {
     const phoneName = phone.phone_name;
     const phoneBrand = phone.brand;
 
-    // phone unique id
+    //! phone unique id
     const phoneUniqueId = phone.slug;
-    // console.log(phoneUniqueId);
-    //
-    //
-    //
+
     const phoneDiv = document.createElement("div");
     phoneDiv.innerHTML = `
       <div class="col">
@@ -44,7 +50,8 @@ const displayPhone = (phones) => {
   });
 };
 
-const loadPhoneDetails = (phoneUniqueId) => {
+// fetching phone details
+const loadPhoneDetails = () => {
   fetch(
     `https://openapi.programming-hero.com/api/phone/apple_iphone_13_pro_max-11089`
   )
@@ -52,13 +59,23 @@ const loadPhoneDetails = (phoneUniqueId) => {
     .then((data) => showPhoneDetails(data.data));
 };
 
+// showing phone details
 const showPhoneDetails = (details) => {
   const detailsContainer = document.getElementById("detail-box");
   const phoneImage = details.image;
   const mainFeatures = details.mainFeatures;
   const cheapSet = mainFeatures.chipSet;
+  const phoneDisplay = mainFeatures.displaySize;
+  const memory = mainFeatures.memory;
   const phoneStorage = mainFeatures.storage;
   const releaseDate = details.releaseDate;
+  const otherInfo = details.others;
+  const Bluetooth = otherInfo.Bluetooth;
+  const GPS = otherInfo.GPS;
+  const NFC = otherInfo.NFC;
+  const Radio = otherInfo.Radio;
+  const USB = otherInfo.USB;
+  const WLAN = otherInfo.WLAN;
 
   const detailsDiv = document.createElement("div");
   detailsDiv.innerHTML = `
@@ -66,9 +83,19 @@ const showPhoneDetails = (details) => {
       <div class="card">
           <img src="${phoneImage}" class="card-img-top phone-image" alt="...">
           <div class="card-body">
-              <p class="card-text">Chip: ${cheapSet}</p>
-              <p class="card-text">Storage: ${phoneStorage}</p>    
-              <p class="card-text">${releaseDate}</p>    
+            <p class="card-text"><strong>Chip:</strong> ${cheapSet}</p>
+              <p class="card-text"><strong>Display:</strong> ${phoneDisplay}</p>
+              <p class="card-text"><strong>Memory:</strong> ${memory}</p>
+              <p class="card-text"><strong>Storage:</strong> ${phoneStorage}</p>                  
+              <br>
+              <p class="card-text"><strong>BlueTooth:</strong> ${Bluetooth}</p>  
+              <p class="card-text"><strong>GPS:</strong> ${GPS}</p>  
+              <p class="card-text"><strong>NFC:</strong> ${NFC}</p>  
+              <p class="card-text"><strong>Radio:</strong> ${Radio}</p>  
+              <p class="card-text"><strong>USB:</strong> ${USB}</p>  
+              <p class="card-text"><strong>WLAN:</strong> ${WLAN}</p>  
+              <br><br>
+              <p class="card-text">${releaseDate}</p> 
           </div>
       </div>
   </div>
