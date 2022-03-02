@@ -3,3 +3,7 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.phone-image {
+    max-width: 300px;
+}
