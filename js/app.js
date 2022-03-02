@@ -19,6 +19,9 @@ const loadPhones = () => {
 };
 
 const displayPhone = (phones) => {
+  // show not more than 20 result
+  phones.length = 20;
+
   const phoneContainer = document.getElementById("phone-container");
   //  clear previous search results
   phoneContainer.textContent = "";
