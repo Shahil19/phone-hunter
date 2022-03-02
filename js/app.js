@@ -34,6 +34,7 @@ const displayPhone = (phones) => {
 
     //! phone unique id
     const phoneUniqueId = phone.slug;
+    // console.log(phoneUniqueId);
 
     const phoneDiv = document.createElement("div");
     phoneDiv.innerHTML = `
@@ -42,7 +43,7 @@ const displayPhone = (phones) => {
               <img src="${phoneImage}" class="card-img-top phone-image" alt="..." >
               <div class="card-body">
                   <h5 class="card-title">${phoneName}</h5>
-                  <h5 class="card-title">${phoneBrand}</h5>
+                  <h5 class="card-title">${phoneBrand}</h5>              
                   <button onclick="loadPhoneDetails()" class="btn btn-primary">Details</button>
               </div>
           </div>
@@ -86,7 +87,7 @@ const showPhoneDetails = (details) => {
       <div class="card">
           <img src="${phoneImage}" class="card-img-top phone-image" alt="...">
           <div class="card-body">
-            <p class="card-text"><strong>Chip:</strong> ${cheapSet}</p>
+              <p class="card-text"><strong>Chip:</strong> ${cheapSet}</p>
               <p class="card-text"><strong>Display:</strong> ${phoneDisplay}</p>
               <p class="card-text"><strong>Memory:</strong> ${memory}</p>
               <p class="card-text"><strong>Storage:</strong> ${phoneStorage}</p>                  
